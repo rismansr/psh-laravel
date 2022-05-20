@@ -1,24 +1,27 @@
 <?php
-
+  
 namespace App\Http\Controllers;
-
+  
 use Illuminate\Http\Request;
-use App\Mail\MyTestMail;
-use Illuminate\Support\Facades\Mail;
-
+use Mail;
+use App\Mail\DemoMail;
+  
 class MailController extends Controller
 {
-    
-    public function index(){
-
-	$details = [
-    'title' => 'Mail from websitepercobaan.com',
-    'body' => 'This is for testing email using smtp'
-    ];
-   
-    \Mail::to('rismansr@gmail.com')->send(new \App\Mail\MyTestMail($details));
-   
-    dd("Email sudah terkirim.");
-
-	}
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function index()
+    {
+        $mailData = [
+            'title' => 'Mail from platform.sh',
+            'body' => 'This is for testing email using smtp.'
+        ];
+         
+        Mail::to('rismansr@gmail.com')->send(new DemoMail($mailData));
+           
+        dd("Email is sent successfully.");
+    }
 }
