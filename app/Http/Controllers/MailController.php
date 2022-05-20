@@ -1,41 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use Mail;
+use App\Mail\MyTestMail;
+use Illuminate\Support\Facades\Mail;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+class MailController extends Controller
+{
+    
+    public function index(){
 
-class MailController extends Controller {
-   public function basic_email() {
-      $data = array('name'=>"Risman");
+	$details = [
+    'title' => 'Mail from websitepercobaan.com',
+    'body' => 'This is for testing email using smtp'
+    ];
    
-      Mail::send(['text'=>'mail'], $data, function($message) {
-         $message->to('risman.ramadhan@platform.sh', 'Platforh.sh')->subject
-            ('Laravel Basic Testing Mail');
-         $message->from('rismansr@gmail.com','risman');
-      });
-      echo "Basic Email Sent. Check your inbox.";
-   }
-   public function html_email() {
-      $data = array('name'=>"Virat Gandhi");
-      Mail::send('mail', $data, function($message) {
-         $message->to('abc@gmail.com', 'Tutorials Point')->subject
-            ('Laravel HTML Testing Mail');
-         $message->from('xyz@gmail.com','Virat Gandhi');
-      });
-      echo "HTML Email Sent. Check your inbox.";
-   }
-   public function attachment_email() {
-      $data = array('name'=>"Virat Gandhi");
-      Mail::send('mail', $data, function($message) {
-         $message->to('abc@gmail.com', 'Tutorials Point')->subject
-            ('Laravel Testing Mail with Attachment');
-         $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
-         $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
-         $message->from('xyz@gmail.com','Virat Gandhi');
-      });
-      echo "Email Sent with attachment. Check your inbox.";
-   }
+    \Mail::to('rismansr@gmail.com')->send(new \App\Mail\MyTestMail($details));
+   
+    dd("Email sudah terkirim.");
+
+	}
 }
