@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('kirim-email','App\Http\Controllers\MailController@index');
+use App\Http\Controllers\SendEmailController;
+
+Route::get('send-email', [SendEmailController::class, 'index']);
