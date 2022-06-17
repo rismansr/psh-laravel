@@ -33,6 +33,11 @@
         }
     },
     "scripts": {
+	"build": [
+            "npm i",
+            "npm run sass-compile",
+            "(cd web/modules/custom/slq_search && npm i)"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
