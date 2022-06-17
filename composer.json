@@ -1,67 +1,460 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
-    "require": {
-        "php": "^8.0.2",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.2",
-        "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7",
-        "platformsh/laravel-bridge": "^2.2"
+  "name": "drupal-composer/drupal-project",
+  "description": "Project template for Drupal 8 projects with composer",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "",
+      "role": ""
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "drupal/address": "^1.4",
+    "drupal/admin_toolbar": "^3.0",
+    "drupal/antibot": "^1.3",
+    "drupal/better_exposed_filters": "^5.0",
+    "drupal/better_normalizers": "^1.0@beta",
+    "drupal/block_class": "^1.0@alpha",
+    "drupal/block_field": "^1.0-rc2",
+    "drupal/bootstrap4": "1.x-dev",
+    "drupal/bootstrap_site_alert": "^1.2",
+    "drupal/captcha": "^1.0@beta",
+    "drupal/ckeditor_liststyle": "^1.3",
+    "drupal/ckeditor_scayt": "^1.0@alpha",
+    "drupal/classy_paragraphs": "^1.0@beta",
+    "drupal/coffee": "^1.0@beta",
+    "drupal/color_field": "^2.2",
+    "drupal/commerce": "^2.17",
+    "drupal/commerce_cart": "^2.17",
+    "drupal/commerce_checkout": "^2.17",
+    "drupal/console": "^1.9",
+    "drupal/core": "^9.3",
+    "drupal/core-composer-scaffold": "^9.2",
+    "drupal/creditfield": "^1.0",
+    "drupal/crop": "^2.0",
+    "drupal/ctools": "^3.0",
+    "drupal/default_content": "^1.0@alpha",
+    "drupal/devel": "^4",
+    "drupal/diff": "^1.0@RC",
+    "drupal/display_field_copy": "^2",
+    "drupal/ds": "^3.1",
+    "drupal/editor_advanced_link": "^1.4",
+    "drupal/email_registration": "^1.0@RC",
+    "drupal/entity_browser": "^2",
+    "drupal/entity_reference_views_select": "^1.3",
+    "drupal/features": "^3.7",
+    "drupal/field_group": "~3.0",
+    "drupal/field_menu": "^1.0@alpha",
+    "drupal/field_permissions": "^1.0@RC",
+    "drupal/fieldblock": "^2.0",
+    "drupal/fontawesome": "^2.12",
+    "drupal/fontyourface": "^3.2",
+    "drupal/geolocation": "^3",
+    "drupal/google_analytics": "^2.2",
+    "drupal/google_tag": "^1.1",
+    "drupal/graphql": "^4.3",
+    "drupal/h5p": "^2.0.0-alpha1",
+    "drupal/hierarchical_taxonomy_menu": "^1.37",
+    "drupal/image_widget_crop": "^2.2",
+    "drupal/inline_entity_form": "^1.0@RC",
+    "drupal/instagramfeed": "1.x-dev",
+    "drupal/jquery_ui_checkboxradio": "^1.2",
+    "drupal/jquery_ui_datepicker": "^1.1",
+    "drupal/jquery_ui_slider": "^1.1",
+    "drupal/jquery_ui_touch_punch": "^1.0",
+    "drupal/link_attributes": "^1.5",
+    "drupal/linkit": "^6.0.0-beta3",
+    "drupal/manage_display": "^1.0@alpha",
+    "drupal/masquerade": "^2.0@beta",
+    "drupal/maxlength": "1.0-rc1",
+    "drupal/media_bulk_upload": "^1.0@alpha",
+    "drupal/menu_block": "^1.5",
+    "drupal/menu_item_extras": "^2.4",
+    "drupal/metatag": "^1.8",
+    "drupal/migrate_plus": "^5.0",
+    "drupal/migrate_source_csv": "^3.0",
+    "drupal/migrate_tools": "^5.1",
+    "drupal/paragraphs": "^1.8",
+    "drupal/paragraphs_admin": "^1.0",
+    "drupal/pathauto": "^1.2",
+    "drupal/publishcontent": "^1.4",
+    "drupal/r4032login": "^2",
+    "drupal/recaptcha": "^3",
+    "drupal/redirect": "^1.2",
+    "drupal/redis": "^1.4",
+    "drupal/replicate": "^1",
+    "drupal/replicate_ui": "^1",
+    "drupal/saml_sp": "^3",
+    "drupal/scheduler": "^1.0",
+    "drupal/scheduler_content_moderation_integration": "^1.3",
+    "drupal/search_api": "^1.17",
+    "drupal/search_api_solr": "^4.1",
+    "drupal/select2boxes": "1.0-alpha10",
+    "drupal/simple_sitemap": "^3.0",
+    "drupal/simplify": "^1.2",
+    "drupal/single_datetime": "^1.6",
+    "drupal/smart_date": "^3.3",
+    "drupal/smart_trim": "^1.1",
+    "drupal/svg_image": "^1.9",
+    "drupal/swiftmailer": "^2",
+    "drupal/tawk_to": "^2",
+    "drupal/token": "^1.1",
+    "drupal/twig_tweak": "^2.9",
+    "drupal/ultimate_cron": "^2.0-alpha5",
+    "drupal/userprotect": "^1.0",
+    "drupal/video_embed_field": "^2.0",
+    "drupal/views_ajax_history": "^1.5",
+    "drupal/views_bulk_operations": "^4.0",
+    "drupal/views_data_export": "^1",
+    "drupal/views_infinite_scroll": "^1.5",
+    "drupal/webform": "^6",
+    "drush/drush": "^11",
+    "league/omnipay": "^3",
+    "lodash-php/lodash-php": "^0.0.7",
+    "nesbot/carbon": "^2.25",
+    "omnipay/securepay": "^3",
+    "platformsh/config-reader": "^2.3",
+    "symfony-cmf/routing": "^2.3.3",
+    "twig/extensions": "^1.5",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3",
+    "wikimedia/composer-merge-plugin": "^2.0"
+  },
+  "require-dev": {
+    "drupal/coder": "^8.3",
+    "drupal/core-dev": "^9.2",
+    "mockery/mockery": "^1.0",
+    "squizlabs/php_codesniffer": "^3.5"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "process-timeout": 900,
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/console-extend-plugin": true,
+      "zodiacmedia/drupal-libraries-installer": true,
+      "drupal/core-composer-scaffold": true,
+      "wikimedia/composer-merge-plugin": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ]
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "build": [
+      "npm i",
+      "npm run sass-compile",
+      "(cd web/modules/custom/slq_search && npm i)"
+    ],
+    "config-import": [
+      "@drush cr",
+      "@drush updb",
+      "@drush cim"
+    ],
+    "config-export": [
+      "@drush cex"
+    ],
+    "drush": [
+      "./vendor/bin/drush --root=$(pwd)/web -y"
+    ],
+    "drush-cr": [
+      "@drush cache:rebuild"
+    ],
+    "drush-cex": [
+      "@drush cex -y"
+    ],
+    "drush-updb": [
+      "@drush updatedb -y"
+    ],
+    "drush-entup": [
+      "@drush entity-updates -y"
+    ],
+    "drush-cron": [
+      "@drush cron"
+    ],
+    "drush-mmode-en": [
+      "@drush state:set system.maintenance_mode 1",
+      "@drush-cr"
+    ],
+    "drush-mmode-dis": [
+      "@drush state:set system.maintenance_mode 0",
+      "@drush-cr"
+    ],
+    "drush-uli": [
+      "@drush user:login"
+    ],
+    "drush-uli-local": [
+      "@drush user:login --uri=http://slq.local"
+    ],
+    "drush-uli-platform-dev": [
+      "@drush user:login --uri=https://dev-platform-5s6kxka-zhchxc2a6laac.au.platformsh.site/"
+    ],
+    "drush-uli-platform-stage": [
+      "@drush user:login --uri=https://stage-platform-phxbspa-zhchxc2a6laac.au.platformsh.site"
+    ],
+    "drush-uli-platform-prod": [
+      "@drush user:login --uri=https://babop.slq.qld.gov.au"
+    ],
+    "drush-migrate-status": [
+      "@drush migrate:status"
+    ],
+    "site-fix-permissions": [
+      "chmod 755 web/sites && chmod 755 web/sites/default && chmod 644 web/sites/default/settings*.php"
+    ],
+    "site-fix-settings": [
+      "@site-fix-permissions",
+      "git checkout web/sites/default/settings.php",
+      "rm web/sites/default/_settings.php 2> /dev/null || true"
+    ],
+    "site-store-credentials": [
+      "echo $PLATFORM_VARIABLES | base64 --decode | node -e 'const fs = require(\"fs\"); console.log(JSON.parse(fs.readFileSync(\"/dev/stdin\", \"utf-8\")).SITE_PRIVATE_KEY)' > /tmp/site.key && chmod 600 /tmp/site.key",
+      "echo $PLATFORM_VARIABLES | base64 --decode | node -e 'const fs = require(\"fs\"); console.log(JSON.parse(fs.readFileSync(\"/dev/stdin\", \"utf-8\")).SITE_PUBLIC_KEY)' > /tmp/site.pub",
+      "echo $PLATFORM_VARIABLES | base64 --decode | node -e 'const fs = require(\"fs\"); console.log(JSON.parse(fs.readFileSync(\"/dev/stdin\", \"utf-8\")).SITE_CERT)' > /tmp/site.cert"
+    ],
+    "site-install-local": [
+      "@site-fix-settings",
+      "mv web/sites/default/settings.php web/sites/default/_settings.php",
+      "cp web/sites/default/default.settings.php web/sites/default/settings.php",
+      "@drush site:install slq -y --db-url=mysql://root:root@localhost/drupal8_slq --existing-config",
+      "@site-install-common",
+      "@site-fix-permissions",
+      "mv web/sites/default/_settings.php web/sites/default/settings.php",
+      "@drush-uli-local"
+    ],
+    "site-install-local-test": [
+      "@drush site:install slq -y --db-url=mysql://root:root@localhost/drupal8_slq_test --existing-config",
+      "@site-install-common",
+      "@site-fix-permissions",
+      "@drush user:login --uri=http://slq-test.local"
+    ],
+    "site-install-docker-ci": [
+      "@drush site:install slq -y --db-url=mysql://root:r00tpa33@mysql/drupal8_slq --existing-config",
+      "./vendor/bin/drush --root=$(pwd)/web -y config:set system.site name 'State Library Of Queensland'",
+      "@site-migrate-core",
+      "@site-init-test-users",
+      "@drush-cr"
+    ],
+    "site-install-platform": [
+      "@drush site:install slq -y --existing-config",
+      "@site-install-common",
+      "@site-migrate-all-text",
+      "@drush-uli"
+    ],
+    "site-install-common": [
+      "@site-migrate-all-text",
+      "./vendor/bin/drush --root=$(pwd)/web -y config:set system.site name 'State Library Of Queensland'",
+      "@drush-cr"
+    ],
+    "site-migrate-events-matrix": [
+      "./vendor/bin/drush php-eval \"var_dump(Drupal::keyValue('migrate_status')->set('slq_node_events_json', 0));\"",
+      "@drush features:import -y slq_content",
+      "@drush migrate:import slq_node_events_json --update"
+    ],
+    "site-migrate-events-edge": [
+      "./vendor/bin/drush php-eval \"var_dump(Drupal::keyValue('migrate_status')->set('slq_edge_events_csv', 0));\"",
+      "@drush features:import -y slq_content",
+      "@drush migrate:import slq_edge_event_files_csv",
+      "@drush migrate:import slq_edge_event_media_csv",
+      "@drush migrate:import slq_edge_events_csv --update",
+      "@drush migrate:import slq_edge_event_urls_csv"
+    ],
+    "site-migrate-test": [
+      "@drush-cr",
+      "@drush features:import -y slq_content",
+      "./vendor/bin/drush php-eval \"var_dump(Drupal::keyValue('migrate_status')->set(' slq_node_events_json', 0));\"",
+      "@drush migrate:import slq_pages_json --update --idlist=40202",
+      "@drush migrate:import slq_page_urls_json --update"
+    ],
+    "site-migrate-all": [
+      "@drush-migrate-status",
+      "@site-migrate-core",
+      "@site-migrate-content",
+      "@site-migrate-events-matrix"
+    ],
+    "site-migrate-all-text": [
+      "@drush-migrate-status",
+      "@site-migrate-core",
+      "@site-migrate-content-lite"
+    ],
+    "site-migrate-core": [
+      "@drush migrate:import slq_user_csv --update",
+      "@site-update-test-users",
+      "@drush migrate:import slq_taxonomy_csv --update",
+      "@drush migrate:import slq_venues_csv --update",
+      "@drush migrate:import slq_menu_csv --update",
+      "@drush migrate:import slq_basic_pages_json --update",
+      "@drush migrate:import slq_basic_page_urls_json --update",
+      "@drush-cr"
+    ],
+    "site-migrate-content": [
+      "@drush migrate:import slq_pages_json --update",
+      "@drush migrate:import slq_page_links_json --update",
+      "@drush migrate:import slq_page_urls_json --update",
+      "@drush-cr"
+    ],
+    "site-migrate-content-lite": [
+      "@drush migrate:import slq_pages_lite_json --update",
+      "@drush migrate:import slq_page_urls_json --update",
+      "@drush-cr"
+    ],
+    "site-migrate-blogs": [
+      "@drush migrate:import slq_blog_featured_image_files_csv --update",
+      "@drush migrate:import slq_blog_featured_image_media_csv --update",
+      "@drush migrate:import slq_blog_posts_csv --update",
+      "@drush migrate:import slq_blog_post_urls_csv",
+      "@drush migrate:import slq_blog_comments_csv",
+      "@drush-cr"
+    ],
+    "site-migrate-taxonomies": [
+      "@drush migrate:import slq_taxonomy_csv",
+      "@drush-cr"
+    ],
+    "site-init-test-users": [
+      "./vendor/bin/drush --root=$(pwd)/web user:create admin --mail admin@example.com 2> /dev/null || true",
+      "./vendor/bin/drush --root=$(pwd)/web user:create slq_blogger --mail slq_blogger@example.com 2> /dev/null || true",
+      "./vendor/bin/drush --root=$(pwd)/web user:create slq_content_author --mail slq_content_author@example.com 2> /dev/null || true",
+      "./vendor/bin/drush --root=$(pwd)/web user:create slq_content_owner --mail slq_content_owner@example.com 2> /dev/null || true",
+      "./vendor/bin/drush --root=$(pwd)/web user:create slq_marketing_officer --mail slq_marketing_officer@example.com 2> /dev/null || true",
+      "./vendor/bin/drush --root=$(pwd)/web user:create slq_patron --mail slq_patron@example.com 2> /dev/null || true",
+      "@drush user:role:add slq_blogger admin,slq_blogger",
+      "@drush user:role:add slq_content_author admin,slq_content_author",
+      "@drush user:role:add slq_content_owner admin,slq_content_owner",
+      "@drush user:role:add slq_marketing_officer admin,slq_marketing_officer",
+      "@drush user:password admin slqd8",
+      "@drush user:password slq_blogger slqd8",
+      "@drush user:password slq_content_author slqd8",
+      "@drush user:password slq_content_owner slqd8",
+      "@drush user:password slq_marketing_officer slqd8",
+      "@drush user:password slq_patron slqd8",
+      "@drush user:unblock admin,slq_blogger,slq_content_author,slq_content_owner,slq_marketing_officer,slq_patron",
+      "@disable-saml"
+    ],
+    "disable-saml": [
+      "@drush config:set -y saml_sp_drupal_login.config force_saml_only 0"
+    ],
+    "site-block-test-users": [
+      "@drush user:block slq_blogger,slq_content_author,slq_content_owner,slq_marketing_officer,slq_patron"
+    ],
+    "site-test-user-logins": [
+      "@drush uli --no-browser --uri=http://slq.local --name=admin",
+      "@drush uli --no-browser --uri=http://slq.local --name=slq_blogger",
+      "@drush uli --no-browser --uri=http://slq.local --name=slq_content_author",
+      "@drush uli --no-browser --uri=http://slq.local --name=slq_content_owner",
+      "@drush uli --no-browser --uri=http://slq.local --name=slq_marketing_officer",
+      "@drush uli --no-browser --uri=http://slq.local --name=slq_patron"
+    ]
+  },
+  "extra": {
+    "drupal-libraries": {
+      "datetimepicker": "https://github.com/xdan/datetimepicker/archive/2.5.20.zip",
+      "jquery-ui-touch-punch": "https://github.com/furf/jquery-ui-touch-punch/archive/refs/heads/master.zip",
+      "scayt": "https://download.ckeditor.com/scayt/releases/scayt_4.8.0.zip"
     },
-    "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "web/"
+      },
+      "file-mapping": {
+        "[project-root]/.editorconfig": false,
+        "[web-root]/.csslintrc": false,
+        "[web-root]/.eslintignore": false,
+        "[web-root]/.eslintrc.json": false,
+        "[web-root]/index.php": false,
+        "[web-root]/robots.txt": false,
+        "[web-root]/sites/development.services.yml": false
+      }
     },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
+    "merge-plugin": {
+      "include": [
+        "web/modules/contrib/dropzonejs/composer.libraries.json"
+      ]
     },
-    "scripts": {
-	"build": [
-            "npm i",
-            "npm run sass-compile",
-            "(cd web/modules/custom/slq_search && npm i)"
-        ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "patches": {
+      "drupal/core": {
+        "Convert node param into node entity in revision routes": "patches/drupal-core-node-revision-param-convert.patch",
+        "Layout discovery fix": "https://www.drupal.org/files/issues/2018-07-04/drupal_layout_discovery-2911996-15.patch",
+        "View filter and/or fix": "https://www.drupal.org/files/issues/2018-08-02/manytoonehelper_ignores-2559961-44-8.5.x.patch",
+        "Content moderation events": "https://www.drupal.org/files/issues/2018-11-06/2873287-50.patch",
+        "Breadcrumb title doesn't reflect view contextual filter's title override": "https://www.drupal.org/files/issues/2021-07-16/2787051-62.patch",
+        "Increase menu link DB field length to something reasonable": "https://www.drupal.org/files/issues/2020-07-08/menu_tree_url_size-3106205-10.patch",
+        "Add ability to disable AJAX for Views exposed form submit": "https://www.drupal.org/files/issues/2021-12-31/2904754-33.patch",
+        "Provide a way for fields with computed or custom storage to decide how to impact entity queries" : "https://www.drupal.org/files/issues/2020-09-25/3025164-28.patch",
+        "REST views: pagination information and total count result": "https://www.drupal.org/files/issues/2021-08-20/2982729-46.patch",
+        "Review/update $adminTags variable for new html elements to be whitelisted": "https://www.drupal.org/files/issues/2021-05-27/review-update-adminTags-variable-2776667-22.patch",
+        "Avoid view entity reference warning": "https://www.drupal.org/files/issues/2021-12-08/3180227-15.patch"
+      },
+      "drupal/recaptcha": {
+        "Fix AJAX forms": "https://www.drupal.org/files/issues/2020-01-30/recaptcha-ajax-2493183-197_0.patch"
+      },
+      "drupal/saml_sp": {
+        "Allow alternative fields to be used as NameID and fix automatic user registration after first login": "patches/drupal-saml-sp-make-seaworthy.patch"
+      },
+      "drupal/webform": {
+        "Force all action handlers to trigger on form submit (not post-save)": "patches/webform-trigger-action-handlers-on-form-submit.patch"
+      },
+      "drupal/views": {
+        "Show keywords in title of search results page": "https://www.drupal.org/files/issues/search_term_in_title-74562-37.patch"
+      },
+      "omnipay/securepay": {
+        "Adds rest api payment option": "patches/securepay-rest-api.patch"
+      },
+      "drupal/scheduler_content_moderation_integration": {
+        "Widget error when field is overridden - undefined offset 0 in $form['publish_state']": "https://www.drupal.org/files/issues/2020-06-30/3077147-28.patch"
+      },
+      "drupal/migrate_plus": {
+        "Support paging through multiple requests": "https://www.drupal.org/files/issues/2022-01-18/migrate_plus-pager_selector_error-2640516-98.patch"
+      }
+    }
+  }
 }
