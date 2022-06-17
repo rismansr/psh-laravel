@@ -20,9 +20,12 @@ build:
     flavor: composer
 
 variables:
+    #env:
+    #    N_PREFIX: /app/.global
     env:
-        N_PREFIX: /app/.global
-
+      COMPOSER_MEMORY_LIMIT: -1
+    php:
+      memory_limit: 1G
 # The hooks that will be performed when the package is deployed.
 hooks:
     build: |
