@@ -21,10 +21,9 @@ variables:
     memory_limit: 1G
 
 relationships:
-  #database: 'mysqldb:mysql'
-  #redis: 'redis:redis'
-  #solr: 'solr:drupal8'
-
+    database: "db:mysql"
+    rediscache: "cache:redis"
+    redissession: "cache:redis"
 # The size of the persistent disk of the application (in MB).
 disk: 30720
 
