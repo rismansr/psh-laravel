@@ -26,16 +26,23 @@ variables:
 # The hooks that will be performed when the package is deployed.
 hooks:
     build: |
-        set -e
+        #set -e
 
         # install a specific NodeJS version https://github.com/platformsh/snippets/
         #   -v requested version
         #   -y install Yarn
-        curl -fsS https://raw.githubusercontent.com/platformsh/snippets/main/src/install_node.sh | { bash /dev/fd/3 -v 14; } 3<&0
+        #curl -fsS https://raw.githubusercontent.com/platformsh/snippets/main/src/install_node.sh | { bash /dev/fd/3 -v 14; } 3<&0
 
         # uncomment next line to build assets deploying
-        npm install
+        #npm install
 
+
+        ## zd186383
+        curl -sS https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | dash -s
+        . ~/.environment
+        nvm install 16
+        nvm alias default 16
+        composer build
     deploy: |
         set -e
         php artisan optimize:clear
