@@ -1,133 +1,149 @@
 # This file describes an application. You can have multiple applications
 # in the same project.
+#
+# See https://docs.platform.sh/user_guide/reference/platform-app-yaml.html
 
 # The name of this app. Must be unique within a project.
-name: app
+name: 'app'
 
-# The type of the application to build.
-type: php:7.4
-
-dependencies:
-    php:
-        composer/composer: '^2'
+# The runtime the application uses.
+type: 'php:7.4'
 
 runtime:
-    extensions:
-        - redis
-      # - blackfire # https://docs.platform.sh/integrations/observability/blackfire.
-
-build:
-    flavor: composer
+  extensions:
+  - sodium
+  - redis
 
 variables:
-    #env:
-    #    N_PREFIX: /app/.global
-    env:
-      COMPOSER_MEMORY_LIMIT: -1
-    php:
-      memory_limit: 1G
-# The hooks that will be performed when the package is deployed.
-hooks:
-    build: |
-        #set -e
+  env:
+    COMPOSER_MEMORY_LIMIT: -1
+  php:
+    memory_limit: 1G
 
-        # install a specific NodeJS version https://github.com/platformsh/snippets/
-        #   -v requested version
-        #   -y install Yarn
-        #curl -fsS https://raw.githubusercontent.com/platformsh/snippets/main/src/install_node.sh | { bash /dev/fd/3 -v 14; } 3<&0
-
-        # uncomment next line to build assets deploying
-        #npm install
-
-
-        ## zd186383
-        curl -sS https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | dash -s
-        . ~/.environment
-        nvm install 16
-        nvm alias default 16
-        composer build
-    deploy: |
-        set -e
-        php artisan optimize:clear
-
-        php artisan migrate --force
-
-# The relationships of the application with services or other applications.
-# The left-hand side is the name of the relationship as it will be exposed
-# to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
-# side is in the form `<service name>:<endpoint name>`.
 relationships:
-    database: "db:mysql"
-    rediscache: "cache:redis"
-    redissession: "cache:redis"
+  database: 'mysqldb:mysql'
+  redis: 'redis:redis'
+  solr: 'solr:drupal8'
 
 # The size of the persistent disk of the application (in MB).
-disk: 2048
+disk: 30720
 
-# The mounts that will be performed when the package is deployed.
+# The 'mounts' describe writable, persistent filesystem mounts in the application. The keys are
+# directory paths, relative to the application root. The values are strings such as
+# 'shared:files/PATH', where PATH is a relative path under the mount's source directory.
 mounts:
-  "storage/app/public":
-      source: local
-      source_path: "public"
-  "storage/framework/views":
-      source: local
-      source_path: "views"
-  "storage/framework/sessions":
-      source: local
-      source_path: "sessions"
-  "storage/framework/cache":
-      source: local
-      source_path: "cache"
-  "storage/logs":
-      source: local
-      source_path: "logs"
-  "bootstrap/cache":
-      source: local
-      source_path: "cache"
-  "/.config":
-      source: local
-      source_path: "config"
+  '/web/sites/default/files': 'shared:files/files'
+  '/tmp': 'shared:files/tmp'
+  '/private': 'shared:files/private'
+  '/.drush': 'shared:files/.drush'
+  '/drush-backups': 'shared:files/drush-backups'
+
+# Configuration of the build of this application.
+build:
+  flavor: composer
+
+# The hooks executed at various points in the lifecycle of the application.
+hooks:
+  # Install recent node.js as well.
+  build: |
+    curl -sS https://platform.sh/cli/installer | php
+    curl -sS https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | dash -s
+    . ~/.environment
+    nvm install 16
+    nvm alias default 16
+    composer build
+
+  # The deploy hook runs after your application has been deployed and started.
+  deploy: |
+    set -e
+    composer site-store-credentials
+    composer config-import
 
 # The configuration of app when it is exposed to the web.
 web:
-    locations:
-        "/":
-            root: "public"
-            index:
-                - index.php
-            allow: true
-            passthru: "/index.php"
-        "/storage":
-            root: "storage/app/public"
-            scripts: false
+  # Specific parameters for different URL prefixes.
+  locations:
+    '/':
+      # The folder from which to serve static assets, for this location.
+      #
+      # This is a filesystem path, relative to the application root.
+      root: 'web'
 
+      # How long to allow static assets from this location to be cached.
+      #
+      # Can be a time in seconds, or -1 for no caching. Times can be
+      # suffixed with "s" (seconds), "m" (minutes), "h" (hours), "d"
+      # (days), "w" (weeks), "M" (months, as 30 days) or "y" (years, as
+      # 365 days).
+      expires: 5m
+
+      # Whether to forward disallowed and missing resources from this
+      # location to the application.
+      #
+      # Can be true, false or a URI path string.
+      passthru: '/index.php'
+
+      headers:
+        Content-Security-Policy: 'frame-src https://spoken.slq.qld.gov.au.master-7rqtwti-h4cvtpfa7xrio.au.platformsh.site'
+        X-Robots-Tag: 'noindex, nofollow'
+
+      # Deny access to static files in this location.
+      allow: false
+
+      # Rules for specific URI patterns.
+      rules:
+        # Allow access to common static files.
+        '\.(jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
+          allow: true
+        '^/robots\.txt$':
+          allow: true
+        '^/sitemap\.xml$':
+          allow: true
+        '\.html$':
+          allow: true
+          scripts: true
+
+        # Deny direct access to configuration files.
+        '^/sites/sites\.php$':
+          scripts: false
+        '^/sites/[^/]+/settings.*?\.php$':
+          scripts: false
+
+    '/sites/default/files':
+      # Allow access to all files in the public files directory.
+      allow: true
+      expires: 5m
+      passthru: '/index.php'
+      root: 'web/sites/default/files'
+
+      headers:
+        X-Robots-Tag: 'noindex, nofollow'
+
+      # Do not execute PHP scripts.
+      scripts: false
+
+      rules:
+        # Provide a longer TTL (2 weeks) for aggregated CSS and JS files.
+        '^/sites/default/files/(css|js)':
+          expires: 2w
+        '/(?<path>sites/default/files/styles/.*)$':
+          passthru: '/index.php?q=$path'
+
+
+# The configuration of scheduled execution.
 crons:
-    # Run Laravel's scheduler every 5 minutes, which is often as crons can run on Professional plans.
-    scheduler:
-        spec: '*/5 * * * *'
-        cmd: 'php artisan schedule:run'
-    # Run Laravel's queue worker task every 9 minutes
-    queue:
-        spec: '*/9 * * * *'
-        # Allow the worker to run for up to 5 minutes. That prevents
-        # a long-running queue from blocking a deploy for more than 5
-        # minutes.
-        cmd: 'php artisan queue:work --max-time=300'
-
-# If you have an especially large queue, you may be better off using a worker.
-# If so, comment out the `queue` cron entry and uncomment this instead. Note that
-# Doing so requires a Medium plan or larger.
-#workers:
-#    queue:
-#        size: S
-#        commands:
-#            # To minimize leakage, the queue worker will stop every hour
-#            # and get restarted automatically.
-#            start: |
-#                php artisan queue:work --max-time=3600
-
-source:
-  operations:
-    auto-update:
-      command: |
-        curl -fsS https://raw.githubusercontent.com/platformsh/source-operations/main/setup.sh | { bash /dev/fd/3 sop-autoupdate; } 3<&0
+  drupal:
+    spec: '* * * * *'
+    cmd: 'cd web; drush core-cron'
+  snapshot:
+    spec: '0 18 * * *'
+    cmd: |
+      if [ "$PLATFORM_BRANCH" = master ]; then
+        platform snapshot:create --yes --no-wait
+      fi
+  regen-certs:
+    spec: '0 17 1,15 * *'
+    cmd: |
+      if [ "$PLATFORM_BRANCH" = master ]; then
+        platform redeploy --yes --no-wait
+      fi
